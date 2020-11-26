@@ -2,7 +2,7 @@
 
 	Neural_Network::Layer::Layer(int prevW, int width) : prevW(prevW), width(width), weight(new float[width * prevW]), bias(new float[width])
 	{
-
+		std::cout << static_cast <float> (rand()) / static_cast <float> (RAND_MAX) << std::endl;
 		for (int x = 0; x < width; x++)
 		{
 			bias[x] = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
@@ -24,6 +24,11 @@
 	{
 		float* ret = new float[width];
 		memcpy(ret, bias, width);
+
+		std::cout << "Layer input:" << std::endl;
+		for (int i = 0; i < prevW; i++)
+			std::cout << "\t" << input[i] << std::endl;
+
 		for (int x = 0; x < width; x++)
 		{
 			for (int y = 0; y < prevW; y++)
@@ -33,10 +38,19 @@
 			ret[x] = Activate(ret[x]);
 		}
 		delete[] input;
+
+		std::cout << "Layer outputs:" << std::endl;
+		for (int i = 0; i < width; i++)
+			std::cout << "\t" << ret[i] << std::endl;
+
 		return ret;
 	}
 
 	float Neural_Network::Layer::Activate(float in)
 	{
-		return 0.5;
+		if (in < 0)
+			in = 0;
+		else if (in > 1)
+			in = 1;
+		return in;
 	}

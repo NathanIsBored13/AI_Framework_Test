@@ -20,11 +20,18 @@ Neural_Network::~Neural_Network()
 
 std::vector<float> Neural_Network::Propigate(std::vector<float>& input)
 {
-	float* ret = &input[0];
-	for (rsize_t i = 0; i < structure.size() - 1; i++)
-	{
-		ret = layers[i].Propigate(ret);
-	}
-	std::vector<float> a = std::vector<float>();
-	return input;
+
+	float* buffer = new float[input.size()];
+	std::copy(input.begin(), input.end(), buffer);
+
+	std::cout << "network input:" << std::endl;
+	for (int i = 0; i < structure[0]; i++)
+		std::cout << "\t" << buffer[i] << std::endl;
+
+	for (size_t i = 0; i < structure.size() - 1; i++)
+		buffer = layers[i].Propigate(buffer);
+
+	std::vector<float> ret(buffer, buffer + structure[structure.size() - 1]);
+	delete[] buffer;
+	return ret;
 }

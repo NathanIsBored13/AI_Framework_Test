@@ -31,3 +31,9 @@ std::vector<float> Neural_Network::Propigate(std::vector<float>& input)
 	delete[] buffer;
 	return ret;
 }
+
+void Neural_Network::Nudge(float chance)
+{
+	for (size_t i = 0; i < structure.size() - 1; i++)
+		layers[i].Nudge(chance);
+}

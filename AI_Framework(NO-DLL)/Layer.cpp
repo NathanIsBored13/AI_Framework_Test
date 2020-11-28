@@ -12,6 +12,12 @@
 		}
 	}
 
+	Neural_Network::Layer::Layer(const Layer& other) : prevW(other.prevW), width(other.width), weight(new float[width * prevW]), bias(new float[width])
+	{
+		memcpy(weight, other.weight, sizeof(float) * width * prevW);
+		memcpy(bias, other.bias, sizeof(float) * width);
+	}
+
 	Neural_Network::Layer::~Layer()
 	{
 		delete[] weight;

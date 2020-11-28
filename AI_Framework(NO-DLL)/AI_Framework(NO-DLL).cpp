@@ -8,6 +8,7 @@ int main()
 	Neural_Network* network = new Neural_Network(vecA);
 	std::vector<float> vecB = std::vector<float>{ 0.5, 0.5 };
 	vecB = network->Propigate(vecB);
+
 	std::cout << "propigate returned:" << std::endl;
 	for (float f : vecB)
 		std::cout << "\t" << f << std::endl;

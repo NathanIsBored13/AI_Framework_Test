@@ -6,6 +6,7 @@
 	{
 	public:
 		Neural_Network(std::vector<int>&);
+		Neural_Network(const Neural_Network&);
 		~Neural_Network();
 		std::vector<float> Propigate(std::vector<float>&);
 	private:
@@ -13,6 +14,7 @@
 		{
 		public:
 			Layer(int, int);
+			Layer(const Layer&);
 			~Layer();
 			float* Propigate(float*);
 		private:

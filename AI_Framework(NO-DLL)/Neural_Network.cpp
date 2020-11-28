@@ -6,6 +6,12 @@ Neural_Network::Neural_Network(std::vector<int>& structure) : structure(structur
 		new(&layers[i]) Layer(structure[i], structure[i + 1]);
 };
 
+Neural_Network::Neural_Network(const Neural_Network& other) : structure(other.structure), layers((Layer*)malloc(sizeof(Layer)* (structure.size() - 1)))
+{
+	for (size_t i = 0; i < structure.size() - 1; i++)
+		new(&layers[i]) Layer(other.layers[i]);
+}
+
 Neural_Network::~Neural_Network()
 {
 	for (size_t i = 0; i < structure.size() - 1; i++)

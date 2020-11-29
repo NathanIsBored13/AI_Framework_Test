@@ -6,11 +6,20 @@
 class TrainingPool
 {
 public:
-	TrainingPool(int, std::vector<int>&);
+	struct TrainingSample
+	{
+	public:
+		std::vector<float> input, output;
+		TrainingSample(std::vector<float> input, std::vector<float> output) : input(input), output(output) {}
+	};
+	TrainingPool(int, std::vector<int>&, std::vector<TrainingSample>&);
 	TrainingPool(const TrainingPool&) = delete;
 	~TrainingPool();
-	void Propigate(std::vector<float>&);
+	Neural_Network GetBestNetwork();
+	//void Propigate(std::vector<float>&);
+	void Train(float);
 private:
-	int count;
+	int count, best = -1;
 	Neural_Network* networks;
+	std::vector<TrainingSample> samples;
 };

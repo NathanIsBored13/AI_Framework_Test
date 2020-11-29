@@ -156,9 +156,11 @@
     <ClCompile Include="AI_Framework(NO-DLL).cpp" />
     <ClCompile Include="Layer.cpp" />
     <ClCompile Include="Neural_Network.cpp" />
+    <ClCompile Include="TrainingPool.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Neural_Network.h" />
+    <ClInclude Include="TrainingPool.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

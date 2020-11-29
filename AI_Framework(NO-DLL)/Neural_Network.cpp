@@ -19,7 +19,7 @@ Neural_Network::~Neural_Network()
 	free(layers);
 }
 
-std::vector<float> Neural_Network::Propigate(std::vector<float>& input)
+void Neural_Network::Propigate(std::vector<float>& input)
 {
 	float* buffer = new float[input.size()];
 	memcpy(buffer, &input[0], structure[0] * sizeof(float));
@@ -27,8 +27,20 @@ std::vector<float> Neural_Network::Propigate(std::vector<float>& input)
 	for (size_t i = 0; i < structure.size() - 1; i++)
 		buffer = layers[i].Propigate(buffer);
 
-	std::vector<float> ret(buffer, buffer + structure[structure.size() - 1]);
+	outBuffer = std::vector<float>(buffer, buffer + structure[structure.size() - 1]);
 	delete[] buffer;
+}
+
+std::vector<float>& Neural_Network::GetOutBuffer()
+{
+	return outBuffer;
+}
+
+float Neural_Network::GetCost(std::vector<float>& expected)
+{
+	float ret = 0;
+	for (int i = 0; i < expected.size(); i++)
+		ret += pow(outBuffer[i] - expected[i], 2);
 	return ret;
 }
 

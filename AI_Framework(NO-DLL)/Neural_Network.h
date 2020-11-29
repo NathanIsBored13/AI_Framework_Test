@@ -11,7 +11,9 @@ public:
 	Neural_Network(std::vector<int>&);
 	Neural_Network(const Neural_Network&);
 	~Neural_Network();
-	std::vector<float> Propigate(std::vector<float>&);
+	void Propigate(std::vector<float>&);
+	std::vector<float>& GetOutBuffer();
+	float GetCost(std::vector<float>&);
 	void Nudge(float);
 private:
 	class Layer
@@ -29,5 +31,6 @@ private:
 		float* bias;
 	};
 	std::vector<int> structure;
+	std::vector<float> outBuffer;
 	Layer* layers;
 };

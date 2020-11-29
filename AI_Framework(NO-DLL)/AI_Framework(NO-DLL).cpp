@@ -9,11 +9,14 @@ int main()
 	std::vector<float> vecB;
 	
 	vecB = std::vector<float>{ 0.5, 0.5 };
-	vecB = network->Propigate(vecB);
+	network->Propigate(vecB);
+	vecB = network->GetOutBuffer();
 
 	std::cout << "propigate returned:" << std::endl;
 	for (float f : vecB)
 		std::cout << "\t" << f << std::endl;
+	vecB = std::vector<float>{ 0.5, 0.5, 0.5, 0.5, 0.5 };
+	std::cout << "network cost is " << network->GetCost(vecB) << std::endl;
 
 	delete network;
 }

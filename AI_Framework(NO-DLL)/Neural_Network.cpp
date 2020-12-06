@@ -39,8 +39,8 @@ std::vector<float>& Neural_Network::GetOutBuffer()
 float Neural_Network::GetCost(std::vector<float>& expected)
 {
 	float ret = 0;
-	for (int i = 0; i < expected.size(); i++)
-		ret += pow(outBuffer[i] - expected[i], 2);
+	for (size_t i = 0; i < expected.size(); i++)
+		ret += static_cast<float>(pow(outBuffer[i] - expected[i], 2));
 	return ret;
 }
 

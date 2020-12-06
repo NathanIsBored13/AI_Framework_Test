@@ -16,7 +16,6 @@ public:
 	TrainingPool(const TrainingPool&) = delete;
 	~TrainingPool();
 	Neural_Network GetBestNetwork();
-	//void Propigate(std::vector<float>&);
 	void Train(float);
 private:
 	int count, best = -1;

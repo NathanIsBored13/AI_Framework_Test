@@ -18,25 +18,9 @@ Neural_Network TrainingPool::GetBestNetwork()
 	return Neural_Network(networks[best]);
 }
 
-//void TrainingPool::Propigate(std::vector<float>& input)
-//{
-//	std::vector<float> exp = std::vector<float>{ 0.5, 0.5, 0.5, 0.5, 0.5 };
-//	std::vector<float> out;
-//	for (int i = 0; i < count; i++)
-//	{
-//		networks[i].Propigate(input);
-//		out = networks[i].GetOutBuffer();
-//
-//		std::cout << "\nnetwork " << i << " returned:" << std::endl;
-//		for (float f : out)
-//			std::cout << "\t" << f << std::endl;
-//		std::cout << "network cost is " << networks[i].GetCost(exp) << std::endl;
-//	}
-//}
-
 void TrainingPool::Train(float mutate)
 {
-	std::pair<int, float>* costs = static_cast<std::pair<int, float>*>(malloc(sizeof(std::pair<int, float>) * count));
+	std::pair<int, float>* costs = new std::pair<int, float>[count];
 
 	for (int i = 0; i < count; i++)
 	{
@@ -51,10 +35,6 @@ void TrainingPool::Train(float mutate)
 
 	std::qsort(costs, count, sizeof(std::pair<int, float>), [](const void* a, const void* b) { return static_cast<const std::pair<int, float>*>(a)->second < static_cast<const std::pair<int, float>*>(b)->second ? 1 : -1; });
 
-	std::cout << "post sort:" << std::endl;
-	for (int i = 0; i < count; i++)
-		std::cout << "\t" << costs[i].first << ", " << costs[i].second << std::endl;
-
 	for (int i = 0; i < count / 2; i++)
 	{
 		networks[costs[i].first].~Neural_Network();
@@ -63,6 +43,5 @@ void TrainingPool::Train(float mutate)
 	}
 
 	best = costs[count - 1].first;
-
-	free(costs);
+	delete[] costs;
 }
